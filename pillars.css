@@ -1,0 +1,162 @@
+#pillars-widget {
+  --pillars-bg: transparent;
+  --pillar-red: #d60000;
+  --gap: 18px;
+  --height: min(70vh, 300px);
+  --baseW: 8px;
+  --activeGrow: 18;
+  --inactiveGrow: 1;
+  --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+
+  --labelScaleInactive: 0.78;
+  --labelOpacityInactive: 0.9;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 28px;
+  background: var(--pillars-bg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+  transform: scale(1);
+  transform-origin: top center;
+}
+
+#pillars-widget * {
+  box-sizing: border-box;
+}
+
+#pillars-widget .pillars {
+  width: min(1100px, 100%);
+  height: var(--height);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--gap);
+}
+
+#pillars-widget .pillar {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  background: var(--pillar-red);
+  height: 100%;
+
+  flex: var(--inactiveGrow) 1 var(--baseW);
+  min-width: 8px;
+
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    92% 6%,
+    92% 94%,
+    100% 100%,
+    0% 100%,
+    8% 94%,
+    8% 6%
+  );
+
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translateZ(0);
+  outline: none;
+
+  transition:
+    flex-grow 850ms cubic-bezier(0.18, 1, 0.22, 1),
+    flex-basis 850ms cubic-bezier(0.18, 1, 0.22, 1),
+    transform 420ms var(--ease),
+    filter 420ms var(--ease);
+}
+
+#pillars-widget .pillar:focus-visible {
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.14);
+}
+
+#pillars-widget .pillar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.10));
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+#pillars-widget .pillar-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 300ms var(--ease) 120ms, transform 420ms var(--ease);
+}
+
+#pillars-widget .pillar.is-active {
+  flex-grow: var(--activeGrow);
+  flex-basis: 0px;
+  filter: saturate(1.05);
+  clip-path: inset(0);
+}
+
+#pillars-widget .pillar.is-active .pillar-video {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#pillars-widget .pillar.is-active::after {
+  opacity: 0.18;
+}
+
+#pillars-widget .pillar-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) scale(1);
+  transform-origin: center;
+
+  opacity: 1;
+  transition: opacity 220ms var(--ease), transform 260ms var(--ease);
+
+  user-select: none;
+  pointer-events: none;
+}
+
+#pillars-widget .pillar.is-active .pillar-label {
+  opacity: 0;
+}
+
+#pillars-widget .pillars:hover .pillar:not(.is-active) .pillar-label {
+  transform: rotate(180deg) scale(var(--labelScaleInactive));
+  opacity: var(--labelOpacityInactive);
+}
+
+@media (hover: none) {
+  #pillars-widget .pillars:hover .pillar:not(.is-active) .pillar-label {
+    transform: rotate(180deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  #pillars-widget {
+    --gap: 12px;
+    --baseW: 30px;
+    --activeGrow: 10;
+    padding: 18px;
+  }
+}

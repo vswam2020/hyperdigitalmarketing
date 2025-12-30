@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hyper-Digital Marketing | Book Release</title>
+    <title>Hyper-Digital Marketing | Vanitha Swaminathan</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="pillars.css">
   </head>
   <body>
   <header>
@@ -54,31 +55,44 @@
       <!-- <a href="https://pittbusiness.wufoo.com/forms/m1ufvqwb1ybo1iq/" class="button">Register for Webinar (Oct 24th)</a> -->
       <!-- <a href="https://business.pitt.edu/events/hyper-digital-marketing-virtual-webinar/" class="button">Learn More</a> -->
       <br /><br />
+      <a href="https://m.youtube.com/watch?v=5oqauvA80HE" class="button">Podcast with Tom Wheelwright</a>
       <a href="https://thehollywooddigest.com/hyper-digital-marketing-six-pillars-of-strategic-brand-marketing-in-an-ai-powered-world-by-vanitha-swaminathan-phd/" class="button">Hollywood Digest Review</a>
-      <a href="https://ceoworld.biz/2025/11/05/why-brand-purpose-is-no-longer-optional-in-the-age-of-ai/" class="button">CEOWorld Article</a>
       <br /><br />
       <a href="https://www.leadershipnow.com/leadingblog/2025/11/the_participation_revolution_t.html" class="button">Leadership Now Article</a>
-      <a href="https://m.youtube.com/watch?v=5oqauvA80HE" class="button">Podcast with Tom Wheelwright</a>
+      <a href="https://ceoworld.biz/2025/11/05/why-brand-purpose-is-no-longer-optional-in-the-age-of-ai/" class="button">CEOWorld Article</a>
       <br /><br />
       <a href="https://www.amazon.com/Hyper-Digital-Marketing-pillars-Strategic-AI-Powered/dp/303195629X" class="button btn">Purchase the Book</a>
       <h3>© 2025 Vanitha Swaminathan — All Rights Reserved</h3>
     </div>
 
     <div class="header-right-side">
-      <div class="media-top">
-        <div class="media-item">
-          <img src="ims/hdm.jpg" alt="HDM Image" />
-        </div>
-        <div class="media-item">
-          <video src="ims/hdm.mp4" autoplay muted loop playsinline controls></video>
+
+      <div class="right-lane">
+        <div id="pillars-mount" class="pillars-mount"></div>
+
+        <div class="media-top">
+          <div class="media-item">
+            <img src="ims/hdm.jpg" alt="HDM Image" />
+          </div>
+          <div class="media-item">
+            <video src="ims/hdm.mp4" autoplay muted loop playsinline controls></video>
+          </div>
         </div>
       </div>
 
-      <div class="main-image">
-        <img src="ims/vanitha.png" alt="Vanitha Swaminathan" />
-      </div>
     </div>
   </header>
 
+
+  <script>
+    fetch("pillars.html")
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById("pillars-mount").innerHTML = html;
+        const s = document.createElement("script");
+        s.src = "pillars.js";
+        document.body.appendChild(s);
+      });
+  </script>
   </body>
 </html>
